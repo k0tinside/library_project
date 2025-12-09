@@ -24,7 +24,6 @@ int User::getMaxBooksAllowed() const {
     return maxBooksAllowed;
 }
 
-
 bool User::canBorrowMore() const {
     return borrowedBooks.size() < maxBooksAllowed;
 }
