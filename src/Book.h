@@ -23,7 +23,7 @@ public:
     std::string getAuthor() const;
     int getYear() const;
     std::string getIsbn() const;
-    bool getIsAvaible() const;
+    bool getIsAvailable() const;
     std::string getBorrowedBy() const;
 
     void borrowBook(std::string userName);

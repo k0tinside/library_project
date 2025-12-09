@@ -28,7 +28,7 @@ std::string Book::getIsbn() const {
     return isbn;
 }
 
-bool Book::getIsAvaible() const {
+bool Book::getIsAvailable() const {
     return isAvailable;
 }
 
