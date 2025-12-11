@@ -1,5 +1,6 @@
 #include "Book.h"
 #include <iostream>
+#include <stdexcept>
 
 Book::Book(const std::string title, 
         const std::string author,
@@ -10,7 +11,15 @@ Book::Book(const std::string title,
     year(year),
     isbn(isbn),
     isAvailable(true),
-    borrowedBy("") {}
+    borrowedBy("") {
+        int cur_year = 2025;
+        if (year < 1450 || year > cur_year) {
+            throw std::invalid_argument("Год должен быть корректным");
+        }
+        if (isbn == "") { 
+            throw std::invalid_argument("ISBN должен быть не пустым");
+        }
+    }
 
 std::string Book::getTitle() const {
     return title;
@@ -37,15 +46,34 @@ std::string Book::getBorrowedBy() const {
 }
 
 void Book::borrowBook(std::string userName) {
+    if (isAvailable == false) {
+        throw std::runtime_error("Книга уже взята");
+    } 
+    if (userName == "") {
+        throw std::invalid_argument("Пустое имя пользователя");
+    }
     isAvailable = false;
     borrowedBy = userName;
 }
 
 void Book::returnBook() {
+    if (isAvailable == true) {
+        throw std::runtime_error("Книгу не забирали");
+    }
     isAvailable = true;
     borrowedBy.clear();
 }
 
 void Book::displayInfo() const {
-    std::cout << "Title: " << title << "\n";
+    std::cout << "Название: " << title << std::endl;
+    std::cout << "Автор: " << author << std::endl;
+    std::cout << "Год: " << year << std::endl;
+    std::cout << "ISBN: " << isbn << std::endl;
+    std::cout << "ISBN: " << isbn << std::endl;
+    if (isAvailable) {
+        std::cout << "Книга доступна" << std::endl;
+    } else {
+        std::cout << "Книга не доступна" << std::endl;
+        std::cout << "Книга взята: " << borrowedBy << std::endl;
+    }
 }
