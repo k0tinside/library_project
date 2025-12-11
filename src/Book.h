@@ -18,7 +18,6 @@ public:
         int year, 
         std::string isbn);
 
-    //Getter-методы для всех полей
     std::string getTitle() const;
     std::string getAuthor() const;
     int getYear() const;
