@@ -44,16 +44,16 @@ bool Book::getIsAvailable() const {
 std::string Book::getBorrowedBy() const {
     return borrowedBy;
 }
-
-void Book::borrowBook(std::string userName) {
+// 
+void Book::borrowBook(std::string userId) {
     if (isAvailable == false) {
         throw std::runtime_error("Книга уже взята");
     } 
-    if (userName == "") {
-        throw std::invalid_argument("Пустое имя пользователя");
+    if (userId == "") {
+        throw std::invalid_argument("Пустое ID пользователя");
     }
     isAvailable = false;
-    borrowedBy = userName;
+    borrowedBy = userId;
 }
 
 void Book::returnBook() {
@@ -68,7 +68,6 @@ void Book::displayInfo() const {
     std::cout << "Название: " << title << std::endl;
     std::cout << "Автор: " << author << std::endl;
     std::cout << "Год: " << year << std::endl;
-    std::cout << "ISBN: " << isbn << std::endl;
     std::cout << "ISBN: " << isbn << std::endl;
     if (isAvailable) {
         std::cout << "Книга доступна" << std::endl;
