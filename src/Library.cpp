@@ -124,33 +124,39 @@ void Library::saveToFile() {
         throw std::runtime_error("Не удалось открыть файл для записи");
     }
 
-    file << "---BOOKS---\n";
+    file << "---BOOKS---" << std::endl;
     for (auto it = books.begin(); it != books.end(); ++it) {
-        file << "BOOK\n";
-        file << "Title: " << it->getTitle() << "\n";
-        file << "Author: " << it->getAuthor() << "\n";
-        file << "Year: " << it->getYear() << "\n";
-        file << "ISBN: " << it->getIsbn() << "\n";
-        file << "Available: " << (it->getIsAvailable() ? "yes" : "no") << "\n";
-        file << "BorrowedBy: " << it->getBorrowedBy() << "\n";
+        file << "BOOK" << std::endl;
+        file << "Title: " << it->getTitle() << std::endl;
+        file << "Author: " << it->getAuthor() << std::endl;
+        file << "Year: " << it->getYear() << std::endl;
+        file << "ISBN: " << it->getIsbn() << std::endl;
+        if (it->getIsAvailable()) {
+            file << "Available: " << "yes" << std::endl;
+        } else {
+            file << "Available: " << "no" << std::endl;
+        }
+        file << "BorrowedBy: " << it->getBorrowedBy() << std::endl;
     }
 
-    file << "---USERS---\n";
+    file << "---USERS---" << std::endl;
     for (auto uit = users.begin(); uit != users.end(); ++uit) {
-        file << "USER\n";
-        file << "Name: " << uit->getName() << "\n";
-        file << "UserID: " << uit->getUserId() << "\n";
-        file << "MaxBooks: " << uit->getMaxBooksAllowed() << "\n";
+        file << "USER" << std::endl;
+        file << "Name: " << uit->getName() << std::endl;
+        file << "UserID: " << uit->getUserId() << std::endl;
+        file << "MaxBooks: " << uit->getMaxBooksAllowed() << std::endl;
 
         const std::vector<std::string>& borrowed = uit->getBorrowedBooks();
         file << "BorrowedBooks: ";
-        for (std::size_t i = 0; i < borrowed.size(); ++i) {
-            file << borrowed[i];
-            if (i + 1 < borrowed.size()) {
+        int i = 0;
+        for (auto it = borrowed.begin(); it != borrowed.end(); ++it) {
+            file << *it;
+            ++i;
+            if (i < borrowed.size()) {
                 file << "|";
             }
         }
-        file << "\n";
+        file << std::endl;
     }
 
     file.close();

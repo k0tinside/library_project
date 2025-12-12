@@ -1,6 +1,8 @@
 #ifndef BOOK_H
 #define BOOK_H
 
+#include <iostream>
+#include <stdexcept>
 #include <string>
 
 class Book {

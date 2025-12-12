@@ -1,6 +1,4 @@
 #include "Book.h"
-#include <iostream>
-#include <stdexcept>
 
 Book::Book(const std::string title, 
         const std::string author,
@@ -44,7 +42,7 @@ bool Book::getIsAvailable() const {
 std::string Book::getBorrowedBy() const {
     return borrowedBy;
 }
-// 
+
 void Book::borrowBook(std::string userId) {
     if (isAvailable == false) {
         throw std::runtime_error("Книга уже взята");
