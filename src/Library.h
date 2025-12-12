@@ -21,7 +21,6 @@ public:
     void returnBook(const std::string& isbn);
     Book* findBookByISBN(const std::string& isbn);
     User* findUserByName(const std::string& name);
-    User* findUserByUserId(const std::string& userId);
     void displayAllBooks();
     void displayAllUsers();
     void saveToFile();

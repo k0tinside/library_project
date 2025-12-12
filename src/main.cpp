@@ -111,16 +111,16 @@ void addUser(Library& lib) {
 
 void borrowBook(Library& lib) {
     std::cout << "\n-----Выдача книги пользователю-----" << std::endl;
-    std::string userId, isbn;
+    std::string userName, isbn;
     
     try {
-        std::cout << "ID пользователя: ";
-        std::getline(std::cin, userId);
+        std::cout << "Имя пользователя: ";
+        std::getline(std::cin, userName);
         
         std::cout << "ISBN книги: ";
         std::getline(std::cin, isbn);
         
-        lib.borrowBook(userId, isbn);
+        lib.borrowBook(userName, isbn);
         std::cout << "Книга выдана" << std::endl;
         
     } catch (const std::invalid_argument& e) {
@@ -176,13 +176,13 @@ void findBook(Library& lib) {
 
 void showUserProfile(Library& lib) {
     std::cout << "\n-----Поиск профиля пользователя-----" << std::endl;
-    std::string userId;
+    std::string userName;
     
     try {
         std::cout << "ID пользователя: ";
-        std::getline(std::cin, userId);
+        std::getline(std::cin, userName);
         
-        User* user = lib.findUserByUserId(userId);
+        User* user = lib.findUserByName(userName);
         if (user != nullptr) {
             user->displayProfile();
         } else {
@@ -210,9 +210,10 @@ int main() {
     SetConsoleCP(65001);
     try {
         Library lib("data/library_data.txt");
-        showMenu();
+        lib.loadFromFile();
         int choice;
         do {
+            showMenu();
             choice = getValidChoice();
             switch (choice) {
                 case 1:
